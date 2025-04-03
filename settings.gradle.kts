@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Belajar BottomBar Jet"
+rootProject.name = "Nested Navigation"
 include(":app")
  

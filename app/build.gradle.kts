@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.belajarbottombarjet"
+    namespace = "com.fajar.nestednavigation"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.belajarbottombarjet"
+        applicationId = "com.fajar.nestednavigation"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
