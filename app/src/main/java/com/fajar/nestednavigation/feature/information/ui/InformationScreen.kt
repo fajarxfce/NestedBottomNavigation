@@ -1,4 +1,4 @@
-package com.fajar.nestednavigation.feature.home.ui
+package com.fajar.nestednavigation.feature.information.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun ProductScreen(name: String, onClick: () -> Unit) {
+fun InformationScreen(name: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center

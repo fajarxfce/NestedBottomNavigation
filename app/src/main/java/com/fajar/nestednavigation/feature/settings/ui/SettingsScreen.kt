@@ -1,4 +1,4 @@
-package com.fajar.nestednavigation.feature.home.ui
+package com.fajar.nestednavigation.feature.settings.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

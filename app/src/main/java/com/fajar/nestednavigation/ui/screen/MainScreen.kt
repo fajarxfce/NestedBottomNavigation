@@ -4,12 +4,6 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.List
-import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -32,12 +26,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fajar.nestednavigation.feature.home.BottomBarScreen
-import com.fajar.nestednavigation.feature.home.navigation.DetailsScreen
-import com.fajar.nestednavigation.feature.home.navigation.detailsNavGraph
-import com.fajar.nestednavigation.feature.home.ui.ProductScreen
-import com.fajar.nestednavigation.ui.cart.CartScreen
-import com.fajar.nestednavigation.ui.profile.ProfileScreen
+import com.fajar.nestednavigation.navigation.BottomBarScreen
+import com.fajar.nestednavigation.navigation.DetailsScreen
+import com.fajar.nestednavigation.navigation.detailsNavGraph
+import com.fajar.nestednavigation.feature.product.ui.ProductScreen
+import com.fajar.nestednavigation.feature.profile.ui.ProfileScreen
+import com.fajar.nestednavigation.feature.settings.ui.SettingsScreen
+import com.fajar.nestednavigation.navigation.BottomBarNavHost
 import kotlinx.collections.immutable.persistentListOf
 import timber.log.Timber
 
@@ -78,7 +73,7 @@ fun MainScreen(
             }
         },
         content = { scaffoldPadding ->
-            NavigationBarNavHost(
+            BottomBarNavHost(
                 navController = navController,
                 startScreen = BottomBarScreen.Product,
                 modifier = modifier.padding(scaffoldPadding),
@@ -92,39 +87,6 @@ fun MainScreen(
         },
         modifier = modifier
     )
-}
-
-@Composable
-fun NavigationBarNavHost(
-    navController: NavHostController,
-    startScreen: BottomBarScreen,
-    onNavigateDetails: (String) -> Unit,
-    onNavigateSettings: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    NavHost(
-        navController = navController,
-        startDestination = startScreen.route,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-        modifier = modifier
-    ) {
-        composable(route = BottomBarScreen.Product.route) {
-            ProductScreen(
-                name = BottomBarScreen.Product.route,
-                onClick = {
-                    navController.navigate(DetailsScreen.Information.route)
-                },
-            )
-        }
-        composable(route = BottomBarScreen.Settings.route) {
-            CartScreen()
-        }
-        composable(route = BottomBarScreen.Profile.route) {
-            ProfileScreen()
-        }
-        detailsNavGraph(navController)
-    }
 }
 
 @Composable
