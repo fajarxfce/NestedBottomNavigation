@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +31,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.fajar.nestednavigation.feature.home.BottomBarScreen
+import com.fajar.nestednavigation.feature.home.navigation.DetailsScreen
+import com.fajar.nestednavigation.feature.home.navigation.detailsNavGraph
 import com.fajar.nestednavigation.feature.home.ui.ProductScreen
 import com.fajar.nestednavigation.navigation.NavigationBarSCreen
 import com.fajar.nestednavigation.ui.cart.CartScreen
@@ -44,9 +49,9 @@ fun MainScreen(
 
     val navigationBarSCreen = remember {
         persistentListOf(
-            NavigationBarSCreen.Home,
-            NavigationBarSCreen.Cart,
-            NavigationBarSCreen.Profile
+            BottomBarScreen.Product,
+            BottomBarScreen.Profile,
+            BottomBarScreen.Settings
         )
     }
 
@@ -75,7 +80,7 @@ fun MainScreen(
         content = { scaffoldPadding ->
             NavigationBarNavHost(
                 navController = navController,
-                startScreen = NavigationBarSCreen.Home,
+                startScreen = BottomBarScreen.Product,
                 modifier = modifier.padding(scaffoldPadding),
                 onNavigateDetails = {
                     Timber.d("onNavigateDetails: $it")
@@ -92,7 +97,7 @@ fun MainScreen(
 @Composable
 fun NavigationBarNavHost(
     navController: NavHostController,
-    startScreen: NavigationBarSCreen,
+    startScreen: BottomBarScreen,
     onNavigateDetails: (String) -> Unit,
     onNavigateSettings: () -> Unit,
     modifier: Modifier = Modifier
@@ -104,26 +109,27 @@ fun NavigationBarNavHost(
         exitTransition = { ExitTransition.None },
         modifier = modifier
     ) {
-        composable(route = NavigationBarSCreen.Home.route) {
+        composable(route = BottomBarScreen.Product.route) {
             ProductScreen(
-                name = NavigationBarSCreen.Home.route,
+                name = BottomBarScreen.Product.route,
                 onClick = {
-
+                    navController.navigate(DetailsScreen.Information.route)
                 },
             )
         }
-        composable(route = NavigationBarSCreen.Cart.route) {
+        composable(route = BottomBarScreen.Settings.route) {
             CartScreen()
         }
-        composable(route = NavigationBarSCreen.Profile.route) {
+        composable(route = BottomBarScreen.Profile.route) {
             ProfileScreen()
         }
+        detailsNavGraph(navController)
     }
 }
 
 @Composable
 fun RowScope.AddNavigationBarItem(
-    screen: NavigationBarSCreen,
+    screen: BottomBarScreen,
     currentDestination: NavDestination?,
     navController: NavHostController,
     modifier: Modifier = Modifier
@@ -135,16 +141,16 @@ fun RowScope.AddNavigationBarItem(
     NavigationBarItem(
         label = {
             Text(
-                text = stringResource(screen.nameResourceId),
+                text = stringResource(screen.title),
                 fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
             )
         },
         icon = {
             Icon(
                 imageVector = when (screen) {
-                    NavigationBarSCreen.Home -> Icons.Rounded.Home
-                    NavigationBarSCreen.Cart -> Icons.Rounded.ShoppingCart
-                    NavigationBarSCreen.Profile -> Icons.Rounded.ShoppingCart
+                    BottomBarScreen.Product -> Icons.Rounded.Home
+                    BottomBarScreen.Profile -> Icons.Rounded.Person
+                    BottomBarScreen.Settings -> Icons.Rounded.Settings
                 },
                 contentDescription = null
             )

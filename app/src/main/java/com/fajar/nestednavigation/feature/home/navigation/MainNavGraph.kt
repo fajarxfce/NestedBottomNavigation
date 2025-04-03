@@ -13,21 +13,19 @@ import com.fajar.nestednavigation.feature.home.ui.SettingsScreen
 import com.fajar.nestednavigation.feature.home.ui.detail.InformationScreen
 import com.fajar.nestednavigation.feature.home.ui.detail.OverviewScreen
 import com.fajar.nestednavigation.navigation.Graph
-import timber.log.Timber
 
 @Composable
-fun HomeNavGraph(navController: NavHostController) {
+fun MainNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         route = Graph.MAIN,
-        startDestination = BottomBarScreen.Home.route
+        startDestination = BottomBarScreen.Product.route
     ) {
-        composable(route = BottomBarScreen.Home.route) {
+        composable(route = BottomBarScreen.Product.route) {
             ProductScreen(
-                name = BottomBarScreen.Home.route,
+                name = BottomBarScreen.Product.route,
                 onClick = {
-                    Timber.tag("TAG").d("HomeNavGraph: ")
-                    navController.navigate(Graph.DETAILS)
+                    navController.navigate(DetailsScreen.Information.route)
                 }
             )
         }
