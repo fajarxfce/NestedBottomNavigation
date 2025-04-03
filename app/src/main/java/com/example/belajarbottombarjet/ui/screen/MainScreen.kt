@@ -1,6 +1,5 @@
-package com.example.belajarbottombarjet.navigation
+package com.example.belajarbottombarjet.ui.screen
 
-import android.graphics.drawable.Icon
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.RowScope
@@ -16,35 +15,35 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import kotlinx.collections.immutable.persistentListOf
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.belajarbottombarjet.feature.home.BottomBarScreen
+import com.example.belajarbottombarjet.feature.home.navigation.HomeNavGraph
 import com.example.belajarbottombarjet.feature.home.ui.HomeScreen
+import com.example.belajarbottombarjet.navigation.AddNavigationBarItem
+import com.example.belajarbottombarjet.navigation.NavigationBarNavHost
+import com.example.belajarbottombarjet.navigation.NavigationBarSCreen
 import com.example.belajarbottombarjet.ui.cart.CartScreen
 import com.example.belajarbottombarjet.ui.profile.ProfileScreen
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun NavigationBarScaffold(
-    startScreen: NavigationBarSCreen,
-    onNavigateDetails: (String) -> Unit,
-    onNavigateSettings: () -> Unit,
-    modifier: Modifier = Modifier
+fun MainScreen(
+    navController: NavHostController = rememberNavController(),
+    modifier : Modifier = Modifier,
 ) {
-    val navController = rememberNavController()
 
     val navigationBarSCreen = remember {
         persistentListOf(
@@ -79,9 +78,7 @@ fun NavigationBarScaffold(
         content = { scaffoldPadding ->
             NavigationBarNavHost(
                 navController = navController,
-                startScreen = startScreen,
-//                onNavigateDetails = onNavigateDetails,
-//                onNavigateSettings = onNavigateSettings,
+                startScreen = NavigationBarSCreen.Home,
                 modifier = modifier.padding(scaffoldPadding)
             )
         },
@@ -89,12 +86,36 @@ fun NavigationBarScaffold(
     )
 }
 
+//@Composable
+//fun BottomBar(navController: NavHostController) {
+//    val screens = listOf(
+//        BottomBarScreen.Home,
+//        BottomBarScreen.Profile,
+//        BottomBarScreen.Settings,
+//    )
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+//
+//    val bottomBarDestination = screens.any { it.route == currentDestination?.route }
+//    if (bottomBarDestination) {
+//        BottomNavigation {
+//            screens.forEach { screen ->
+//                AddItem(
+//                    screen = screen,
+//                    currentDestination = currentDestination,
+//                    navController = navController
+//                )
+//            }
+//        }
+//    }
+//}
+
 @Composable
 fun NavigationBarNavHost(
     navController: NavHostController,
     startScreen: NavigationBarSCreen,
-//    onNavigateDetails: (String) -> Unit,
-//    onNavigateSettings: () -> Unit,
+    onNavigateDetails: (String) -> Unit,
+    onNavigateSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(

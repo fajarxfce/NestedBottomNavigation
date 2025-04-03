@@ -11,6 +11,7 @@ import com.example.belajarbottombarjet.navigation.AppNavHost
 import com.example.belajarbottombarjet.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.runtime.getValue
+import com.example.belajarbottombarjet.navigation.AppNavGraph
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,10 +23,11 @@ class MainActivity : ComponentActivity() {
             AppTheme(navController = navController) {
                 val viewModel : MainViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                AppNavHost(
-                    navController = navController,
-                    navigationBarStartScreen = uiState.startScreen
-                )
+//                AppNavHost(
+//                    navController = navController,
+//                    navigationBarStartScreen = uiState.startScreen
+//                )
+                AppNavGraph(navController = navController)
             }
         }
     }
