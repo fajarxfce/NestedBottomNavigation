@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Belajar BottomBar Jet</string>
-    <string name="home_screen">Home</string>
-    <string name="cart_screen">Cart</string>
-    <string name="profile_screen">Profile</string>
     <string name="product">Product</string>
     <string name="profile">Profile</string>
     <string name="setting">Setting</string>

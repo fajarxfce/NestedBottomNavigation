@@ -35,7 +35,6 @@ import com.fajar.nestednavigation.feature.home.BottomBarScreen
 import com.fajar.nestednavigation.feature.home.navigation.DetailsScreen
 import com.fajar.nestednavigation.feature.home.navigation.detailsNavGraph
 import com.fajar.nestednavigation.feature.home.ui.ProductScreen
-import com.fajar.nestednavigation.navigation.NavigationBarSCreen
 import com.fajar.nestednavigation.ui.cart.CartScreen
 import com.fajar.nestednavigation.ui.profile.ProfileScreen
 import kotlinx.collections.immutable.persistentListOf

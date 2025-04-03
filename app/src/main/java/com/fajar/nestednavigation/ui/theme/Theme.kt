@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fajar.nestednavigation.navigation.Screen
+import com.fajar.nestednavigation.feature.home.BottomBarScreen
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -54,7 +54,9 @@ fun AppTheme(
 
     LaunchedEffect(navBackStackEntry) {
         val currentRoute = navBackStackEntry?.destination?.route
-        val inNavigationBarScreen = currentRoute == Screen.NavigationBar.route
+        val inNavigationBarScreen = currentRoute == BottomBarScreen.Product.route ||
+                currentRoute == BottomBarScreen.Profile.route ||
+                currentRoute == BottomBarScreen.Settings.route
 
         val gestureBarColor = if (inNavigationBarScreen) {
             darkColorScheme.primaryContainer
