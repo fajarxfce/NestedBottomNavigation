@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.List
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.ShoppingCart
@@ -147,9 +148,9 @@ fun RowScope.AddNavigationBarItem(
         icon = {
             Icon(
                 imageVector = when (screen) {
-                    BottomBarScreen.Product -> Icons.Rounded.Home
-                    BottomBarScreen.Profile -> Icons.Rounded.Person
-                    BottomBarScreen.Settings -> Icons.Rounded.Settings
+                    BottomBarScreen.Product -> BottomBarScreen.Product.icon
+                    BottomBarScreen.Profile -> BottomBarScreen.Profile.icon
+                    BottomBarScreen.Settings -> BottomBarScreen.Settings.icon
                 },
                 contentDescription = null
             )
