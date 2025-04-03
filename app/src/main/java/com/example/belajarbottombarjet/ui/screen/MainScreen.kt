@@ -29,15 +29,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.belajarbottombarjet.feature.home.BottomBarScreen
-import com.example.belajarbottombarjet.feature.home.navigation.HomeNavGraph
-import com.example.belajarbottombarjet.feature.home.ui.HomeScreen
-import com.example.belajarbottombarjet.navigation.AddNavigationBarItem
-import com.example.belajarbottombarjet.navigation.NavigationBarNavHost
+import com.example.belajarbottombarjet.feature.home.ui.ProductScreen
 import com.example.belajarbottombarjet.navigation.NavigationBarSCreen
 import com.example.belajarbottombarjet.ui.cart.CartScreen
 import com.example.belajarbottombarjet.ui.profile.ProfileScreen
 import kotlinx.collections.immutable.persistentListOf
+import timber.log.Timber
 
 @Composable
 fun MainScreen(
@@ -79,36 +76,18 @@ fun MainScreen(
             NavigationBarNavHost(
                 navController = navController,
                 startScreen = NavigationBarSCreen.Home,
-                modifier = modifier.padding(scaffoldPadding)
+                modifier = modifier.padding(scaffoldPadding),
+                onNavigateDetails = {
+                    Timber.d("onNavigateDetails: $it")
+                },
+                onNavigateSettings = {
+                    Timber.d("onNavigateSettings: ")
+                }
             )
         },
         modifier = modifier
     )
 }
-
-//@Composable
-//fun BottomBar(navController: NavHostController) {
-//    val screens = listOf(
-//        BottomBarScreen.Home,
-//        BottomBarScreen.Profile,
-//        BottomBarScreen.Settings,
-//    )
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val currentDestination = navBackStackEntry?.destination
-//
-//    val bottomBarDestination = screens.any { it.route == currentDestination?.route }
-//    if (bottomBarDestination) {
-//        BottomNavigation {
-//            screens.forEach { screen ->
-//                AddItem(
-//                    screen = screen,
-//                    currentDestination = currentDestination,
-//                    navController = navController
-//                )
-//            }
-//        }
-//    }
-//}
 
 @Composable
 fun NavigationBarNavHost(
@@ -126,9 +105,11 @@ fun NavigationBarNavHost(
         modifier = modifier
     ) {
         composable(route = NavigationBarSCreen.Home.route) {
-            HomeScreen(
-                name = "${NavigationBarSCreen.Home.route}",
-                onClick = {}
+            ProductScreen(
+                name = NavigationBarSCreen.Home.route,
+                onClick = {
+
+                },
             )
         }
         composable(route = NavigationBarSCreen.Cart.route) {

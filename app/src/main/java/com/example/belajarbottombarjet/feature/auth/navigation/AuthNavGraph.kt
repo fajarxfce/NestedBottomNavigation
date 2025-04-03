@@ -1,6 +1,5 @@
 package com.example.belajarbottombarjet.feature.auth.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -9,7 +8,9 @@ import com.example.belajarbottombarjet.feature.auth.ui.LoginScreen
 import com.example.belajarbottombarjet.feature.auth.ui.SignUpScreen
 import com.example.belajarbottombarjet.navigation.Graph
 
-fun NavGraphBuilder.authNavGraph(navController: NavHostController){
+fun NavGraphBuilder.authNavGraph(
+    navController: NavHostController
+){
     navigation(
         route = Graph.AUTHENTICATION,
         startDestination = AuthScreen.Login.route
@@ -17,8 +18,10 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController){
         composable(route = AuthScreen.Login.route) {
             LoginScreen(
                 onClick = {
-                    navController.popBackStack()
-                    navController.navigate(Graph.HOME)
+                    navController.apply {
+                        popBackStack()
+                        navigate(Graph.MAIN)
+                    }
                 },
                 onSignUpClick = {
                     navController.navigate(AuthScreen.SignUp.route)

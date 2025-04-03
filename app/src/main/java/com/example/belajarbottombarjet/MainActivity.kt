@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.example.belajarbottombarjet.navigation.AppNavHost
 import com.example.belajarbottombarjet.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.runtime.getValue
@@ -23,10 +22,6 @@ class MainActivity : ComponentActivity() {
             AppTheme(navController = navController) {
                 val viewModel : MainViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-//                AppNavHost(
-//                    navController = navController,
-//                    navigationBarStartScreen = uiState.startScreen
-//                )
                 AppNavGraph(navController = navController)
             }
         }
