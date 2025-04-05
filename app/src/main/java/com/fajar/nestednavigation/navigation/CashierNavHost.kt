@@ -8,7 +8,7 @@ import com.fajar.nestednavigation.feature.auth.navigation.authNavGraph
 import com.fajar.nestednavigation.ui.screen.MainScreen
 
 @Composable
-fun AppNavGraph(
+fun CashierNavHost(
     navController: NavHostController
 ) {
     NavHost(

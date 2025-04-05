@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.fajar.nestednavigation.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.runtime.getValue
-import com.fajar.nestednavigation.navigation.AppNavGraph
+import com.fajar.nestednavigation.navigation.CashierNavHost
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             AppTheme(navController = navController) {
                 val viewModel : MainViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                AppNavGraph(navController = navController)
+                CashierNavHost(navController = navController)
             }
         }
     }
