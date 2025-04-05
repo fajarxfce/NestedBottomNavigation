@@ -11,22 +11,40 @@ import com.fajar.nestednavigation.feature.auth.ui.SignUpScreen
 import com.fajar.nestednavigation.navigation.Graph
 import kotlinx.serialization.Serializable
 
-@Serializable data object LoginRoute
+@Serializable data object AuthBaseRoot
+@Serializable data object LoginRoutes
+@Serializable data object SignUpRoute
+@Serializable data object ForgotRoute
 
-fun NavController.navigateToLogin(
-    navOptions: NavOptions? = null,
-) {
-    navigate(route = LoginRoute, navOptions = navOptions)
+
+fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
+    navigate(
+        route = LoginRoutes,
+        navOptions = navOptions
+    )
 }
 
-fun NavGraphBuilder.authNavigation(
+fun NavController.navigateToSignUp(navOptions: NavOptions? = null) {
+    navigate(
+        route = SignUpRoute,
+        navOptions = navOptions
+    )
+}
+
+fun NavController.navigateToForgot(navOptions: NavOptions? = null) {
+    navigate(
+        route = ForgotRoute,
+        navOptions = navOptions
+    )
+}
+
+fun NavGraphBuilder.authSection(
     navController: NavHostController
 ){
-    navigation(
-        route = Graph.AUTHENTICATION,
-        startDestination = AuthScreen.Login.route
+    navigation<AuthBaseRoot>(
+        startDestination = LoginRoutes
     ) {
-        composable(route = AuthScreen.Login.route) {
+        composable<LoginRoutes> {
             LoginScreen(
                 onClick = {
                     navController.apply {
@@ -34,23 +52,19 @@ fun NavGraphBuilder.authNavigation(
                         navigate(Graph.MAIN)
                     }
                 },
-                onSignUpClick = {
-                    navController.navigate(AuthScreen.SignUp.route)
-                },
-                onForgotClick = {
-                    navController.navigate(AuthScreen.Forgot.route)
-                }
+                onSignUpClick = navController::navigateToSignUp,
+                onForgotClick = navController::navigateToForgot
             )
         }
 
-        composable(route = AuthScreen.SignUp.route) {
+        composable<SignUpRoute> {
             SignUpScreen(
                 name = AuthScreen.SignUp.route,
                 onClick = {}
             )
         }
 
-        composable(route = AuthScreen.Forgot.route) {
+        composable<ForgotRoute> {
             SignUpScreen(
                 name = AuthScreen.Forgot.route,
                 onClick = {}

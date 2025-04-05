@@ -65,6 +65,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.systemuicontroller)
 
+    //lifecycle runtime compose
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
