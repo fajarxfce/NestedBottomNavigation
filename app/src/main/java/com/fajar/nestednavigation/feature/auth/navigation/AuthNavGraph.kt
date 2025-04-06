@@ -9,3 +9,7 @@ import com.fajar.nestednavigation.feature.auth.ui.LoginScreen
 import com.fajar.nestednavigation.feature.auth.ui.SignUpScreen
 import com.fajar.nestednavigation.navigation.Graph
 import kotlinx.serialization.Serializable
+
+fun anjay(){
+    println("anjay")
+}
